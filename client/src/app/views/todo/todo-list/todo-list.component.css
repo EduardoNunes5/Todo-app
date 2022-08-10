@@ -1,0 +1,14 @@
+
+.table{
+  overflow: auto;
+}
+
+.table tr td {
+  height: 2em;
+}
+
+.btn-sm{
+  height: 1.8em;
+  line-height: 1em;
+}
+

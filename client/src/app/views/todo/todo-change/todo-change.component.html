@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center">
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Título</label>
+    <input name="title" type="text" class="form-control" [attr.data-cy-testid]="'title-input'" formControlName="title" placeholder="título" required />
+  </div>
+
+  <div class="form-group">
+    <label for="title">Descrição</label>
+    <textarea name="description" type="text" class="form-control" [attr.data-cy-testid]="'description-input'" formControlName="description" placeholder="descrição"></textarea>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button type="submit" class="btn btn-primary" [attr.data-cy-testid]="'confirm-button'">Salvar</button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      [attr.data-cy-testid]="'cancel-button'"
+      [routerLink]="['']"
+      >Cancelar</button>
+  </div>
+</form>
+</div>

@@ -1,0 +1,46 @@
+<main class="d-flex flex-column align-items-center">
+  <button type="button" class="btn btn-primary mb-3" [attr.data-cy]="'create-todo'" [routerLink]="['add']">
+    Adicionar tarefa
+  </button>
+
+  <div class="table-container table">
+    <table class="table table-hover table-sm table-responsive-sm">
+      <colgroup>
+        <col class="col-md-5">
+        <col class="col-md-7">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">título</th>
+          <th scope="col" class="text-center">ações</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="todos && todos.content && todos.content.length > 0; else emptyTodos">
+        <tr *ngFor="let item of todos?.content; let i = index">
+          <td class="align-middle" scope="row" [attr.data-testid]="'todo-' + i">{{item.id}}</td>
+          <td class="align-middle" [attr.data-cy]="'todo-title-' + i">{{item.title}}</td>
+          <td class="d-flex flex-nowrap">
+            <button type="button" class="btn btn-sm btn-secondary" [attr.data-cy]="'edit-button-' + i"
+              [routerLink]="['edit', item.id]">editar</button>
+            <button type="button" class="btn btn-sm btn-danger" [attr.data-cy]="'edit-button-' + i"
+              (click)="onDeleteClick(item.id)">remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center ">
+    <app-pagination [current]="currentPage" [total]="totalPages" (goTo)="onGoTo($event)" (next)="onNext($event)"
+      (previous)="onPrevious($event)"></app-pagination>
+  </div>
+
+  <ng-template #emptyTodos>
+    <p>
+      Nenhuma tarefa criada ainda
+    </p>
+  </ng-template>
+
+</main>
+
+<app-loading *ngIf="loading"></app-loading>

@@ -1,0 +1,29 @@
+<nav aria-label="pagination">
+  <ul class="pagination">
+    <li [attr.data-cy]="'previous-btn'" class="page-item" [ngClass]="current === 0 ? 'disabled' : ''">
+      <button aria-label="Ir para a página anterior" [attr.aria-disabled]="current === 1" [disabled]="current === 0"
+        (click)="onPrevious()" class="page-link">
+        Ant.
+      </button>
+    </li>
+
+    <li class="page-item"*ngFor="let page of pages;"
+      [ngClass]="{'active': (page - 1) === current}">
+      <button [attr.aria-current]="(page - 1) === current ? 'page' : null"
+         [attr.aria-label]="(page - 1) === current ? 'Current Page, Page ' + page : 'Go to Page ' + page"
+         [class.current]="(page - 1) === current" tabindex="0" (click)="onGoTo(page)" (keyup.enter)="onGoTo(page)"
+         class="page-link"
+         [disabled]="(page - 1) === current"
+         >
+        {{ page }}
+      </button>
+
+    <li [attr.data-cy]="'next-btn'" class="page-item" [ngClass]="current === (total - 1) ? 'disabled' : ''" class="page-item">
+      <button aria-label="Ir à próxima página" [attr.aria-disabled]="current  === (total - 1)" [disabled]="current === (total - 1)"
+        (click)="onNext();" class="page-link">
+        Próx.
+      </button>
+    </li>
+
+  </ul>
+</nav>
