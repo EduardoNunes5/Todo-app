@@ -36,8 +36,8 @@ export class TodoListComponent implements OnInit {
     this.todoService.findAllPaginated({ params: p })
       .subscribe(data => {
         this.todos = data;
-        this.currentPage = data.number ? data.number : this.currentPage;
-        this.totalPages = this.todos.totalPages || 0;
+        this.currentPage = data.number;
+        this.totalPages = this.todos.totalPages;
         this.loading = false;
       })
 
@@ -47,7 +47,18 @@ export class TodoListComponent implements OnInit {
     this.loading = true;
     this.todoService.delete(id).subscribe(data => {
       if (this.todos)
-        this.todos.content = this.todos.content?.filter(todo => todo.id !== id);
+      this.todos.content = this.todos.content?.filter(todo => todo.id !== id);
+      this.todos!.numberOfElements = this.todos!.numberOfElements - 1;
+      if(this.todos!.numberOfElements <= 0 && !this.todos!.first){
+        this.performSearch(this.currentPage - 1, 10);
+      }
+      else if (this.todos!.numberOfElements <= 0){
+        this.todos!.content.length = 0;
+        this.totalPages = 0;
+      }
+      else if(!this.todos!.last){
+        this.performSearch(this.currentPage, 10);
+      }
       this.notificationService.success("Todo removida com sucesso");
       this.loading = false;
     })
