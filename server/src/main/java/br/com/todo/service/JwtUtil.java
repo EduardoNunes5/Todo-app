@@ -3,10 +3,6 @@ package br.com.todo.service;
 import br.com.todo.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.impl.ClaimsHolder;
-import com.auth0.jwt.impl.PayloadClaimsHolder;
-import com.auth0.jwt.impl.PayloadSerializer;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Payload;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.time.LocalTime;
-import java.util.Map;
 import java.util.function.Function;
 
 @Component

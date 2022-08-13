@@ -35,8 +35,8 @@ export class TodoChangeComponent implements OnInit {
     this.route.data.subscribe((data: Data) => {
       const item: Todo = data.todo;
 
-      this.edit = item ? true : false
-      console.log(item);
+      this.edit = item ? true : false;
+
       this.itemForm = this.fb.group({
         id: [item ? item.id : ''],
         title: [item? item.title : '', Validators.required],
@@ -69,14 +69,16 @@ export class TodoChangeComponent implements OnInit {
     return methods[method];
   }
 
-
-
-
   formData() {
+    let user = localStorage.getItem('user');
+    if(user){
+      user = JSON.parse(user);
+    }
     return {
       id: this.itemForm.value.id,
       title: this.itemForm.value.title,
-      description: this.itemForm.value.description
+      description: this.itemForm.value.description,
+      user
     }
   }
 }

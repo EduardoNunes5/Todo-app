@@ -2,9 +2,10 @@ package br.com.todo.service;
 
 import br.com.todo.dto.UserDTO;
 import br.com.todo.entity.User;
+import br.com.todo.exception.UserNotFoundException;
 import br.com.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
     }
 
     public UserDTO save(UserDTO dto){
@@ -41,6 +42,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public List<UserDTO> findAll(){
         return this.userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    public User getUserFromContext(){
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+     }
+
+    public User getReferenceById(Long id){
+        return this.userRepository.getReferenceById(id);
+    }
+
+    public User getLoggedInUserReference(){
+        return this.userRepository.getReferenceById(getUserFromContext().getId());
     }
 
 }

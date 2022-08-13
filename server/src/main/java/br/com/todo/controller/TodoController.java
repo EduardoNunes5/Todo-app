@@ -1,8 +1,10 @@
 package br.com.todo.controller;
 
 
+import br.com.todo.dto.TodoDTO;
 import br.com.todo.entity.Todo;
 import br.com.todo.repository.TodoRepository;
+import br.com.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -12,54 +14,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/todos")
 public class TodoController {
 
     @Autowired
-    private TodoRepository repository;
-
+    private TodoService service;
 
     @PostMapping
-    public Todo save(@RequestBody Todo todo){
-        return this.repository.save(todo);
+    public TodoDTO save(@RequestBody @Valid TodoDTO todo){
+        return this.service.save(todo);
     }
 
     @GetMapping
     public Page<Todo> findAll(@PageableDefault Pageable pageable){
-        return this.repository.findAll(pageable);
+        return this.service.findAll(pageable);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Todo> getById(@PathVariable Long id){
-        Todo todo = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada"));
-        return ResponseEntity.ok(todo);
+    public TodoDTO getById(@PathVariable Long id){
+        return this.service.findById(id);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Todo> put(@PathVariable Long id, @RequestBody Todo todoForm){
-        try {
-            Todo todo = this.repository.getReferenceById(id);
-            todo.setDescription(todoForm.getDescription());
-            todo.setTitle(todoForm.getTitle());
-            return ResponseEntity.ok(this.repository.save(todo));
-        }
-        catch (EntityNotFoundException enfe) {
-            return ResponseEntity.notFound().build();
-        }
+    public TodoDTO put(@PathVariable Long id, @RequestBody TodoDTO todoForm){
+        return this.service.put(id, todoForm);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        try {
-            this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        catch(EmptyResultDataAccessException erdae){
-            return ResponseEntity.notFound().build();
-        }
+    public void delete(@PathVariable Long id) {
+//        try {
+//            this.repository.deleteById(id);
+//            return ResponseEntity.ok().build();
+//        }
+//        catch(EmptyResultDataAccessException erdae){
+//            return ResponseEntity.notFound().build();
+//        }
+        this.service.delete(id);
     }
+
 }

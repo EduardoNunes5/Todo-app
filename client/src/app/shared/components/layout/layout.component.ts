@@ -1,3 +1,4 @@
+import { JwtService } from 'src/app/shared/services/jwt.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jwtService: JwtService) { }
 
   ngOnInit(): void {
+  }
+
+  isLoggedIn():boolean {
+    return this.jwtService.isLoggedIn();
+  }
+
+  logout(): void{
+    this.jwtService.clear();
   }
 
 }

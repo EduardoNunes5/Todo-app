@@ -1,13 +1,12 @@
 package br.com.todo.config;
 
+import br.com.todo.entity.User;
 import br.com.todo.service.JwtUtil;
 import br.com.todo.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -36,7 +35,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             username = jwtUtil.getSubject(token);
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+                User userDetails = this.userDetailsService.loadUserByUsername(username);
                 if(jwtUtil.validateToken(token, userDetails)){
                     UsernamePasswordAuthenticationToken userToken = new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
                     userToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

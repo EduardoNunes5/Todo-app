@@ -1,7 +1,12 @@
 <div id="app-container">
   <header class="mb-2">
-    <nav class="navbar navbar-dark bg-dark">
-      <h1 class="text-light">Todo App</h1>
+    <nav class="navbar navbar-dark bg-dark text-light">
+      <a href="#" [routerLink]="['/']">
+        <h1>Todo App</h1>
+      </a>
+      <a *ngIf="isLoggedIn()" (click)="logout()"href="#">
+        Logout
+      </a>
     </nav>
   </header>
 

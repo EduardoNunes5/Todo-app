@@ -9,6 +9,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin-bottom: 4em;
+  background-color: #DCDCDC;
 }
 
 * {
@@ -20,6 +21,22 @@ body {
 }
 
 .table-container {
-  width: 50%;
+  width: 80%;
   height: 25em;
+}
+
+a, a:focus, a:active {
+  color: inherit;
+}
+
+a:hover{
+  color: whitesmoke;
+}
+
+@media (max-width: 550px){
+
+}
+
+#coisa {
+  word-break: break-all;
 }

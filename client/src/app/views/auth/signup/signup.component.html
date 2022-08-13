@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center mt-4">
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="bg-dark p-3 text-light rounded">
+    <div class="form-group">
+      <label for="username">Usuário</label>
+      <input name="username" type="text" class="form-control" [attr.data-cy-testid]="'username-input'" formControlName="username" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input name="email" type="email" class="form-control" [attr.data-cy-testid]="'email-input'" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input name="password" type="password" class="form-control" [attr.data-cy-testid]="'password-input'" formControlName="password" />
+    </div>
+    <div class="d-flex flex-column align-items-center mt-3">
+      <button type="submit" class="btn btn-primary" [attr.data-cy-testid]="'confirm-button'">Registrar</button>
+      <!-- <button
+        type="button"
+        class="btn btn-danger"
+        [attr.data-cy-testid]="'cancel-button'"
+        [routerLink]="['']"
+        >Cancelar</button> -->
+      <a href="#" [routerLink]="['..', 'signin']" class="mt-2 link-light">Já possui uma conta? Entrar</a>
+    </div>
+  </form>
+  </div>
