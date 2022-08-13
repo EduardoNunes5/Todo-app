@@ -8,21 +8,29 @@
 }
 
 .btn-sm{
-  height: 1.8em;
+  /* height: 1.8em; */
   line-height: 1em;
 }
 
 .actions {
     display: flex;
     flex-direction: row;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    align-items: center;
   }
 .actions button{
     width: 100%;
-    margin: .1em
+    margin-right: .2em;
 }
 @media (max-width: 550px){
   .actions {
     display: table-cell;
+  }
+
+  .actions button{
+    margin: 0;
   }
 
 }
