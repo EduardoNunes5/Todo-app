@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "tb_todo")
 public class Todo {
 
     @Id
@@ -20,5 +21,8 @@ public class Todo {
 
     @Lob
     private String description;
+
+    @ManyToOne
+    private User user;
 
 }

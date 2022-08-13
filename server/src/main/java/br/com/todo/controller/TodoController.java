@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/todos")
@@ -33,8 +34,9 @@ public class TodoController {
     }
 
     @GetMapping("{id}")
-    public Todo getById(@PathVariable Long id){
-        return this.repository.findById(id).get();
+    public ResponseEntity<Todo> getById(@PathVariable Long id){
+        Todo todo = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada"));
+        return ResponseEntity.ok(todo);
     }
 
     @PutMapping("{id}")
