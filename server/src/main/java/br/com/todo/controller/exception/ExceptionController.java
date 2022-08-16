@@ -14,7 +14,7 @@ public class ExceptionController {
 
 
     @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public CustomErrorResponse userNotFoundException(UserNotFoundException unfe){
         return CustomErrorResponse.builder()
                 .message(unfe.getMessage())
