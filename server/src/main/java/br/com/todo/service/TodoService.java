@@ -10,6 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -50,7 +51,7 @@ public class TodoService {
         return this.todoRepository.findAll(pageable);
     }
 
-    public TodoDTO save(TodoDTO dto) {
+     public TodoDTO save(TodoDTO dto) {
         dto.setId(null);
         Todo todo = new Todo();
         this.fromDTOtoEntity(dto, todo);
@@ -61,7 +62,7 @@ public class TodoService {
     private void fromDTOtoEntity(TodoDTO dto, Todo todo){
         todo.setTitle(dto.getTitle());
         todo.setDescription(dto.getDescription());
-        todo.setUser(this.userDetailsService.getReferenceById(dto.getUser().getId()));
+        todo.setUser(this.userDetailsService.getUserFromContext());
     }
 
 }
