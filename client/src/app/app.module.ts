@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ErrorInterceptor } from './shared/interceptors/err.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,11 @@ import { JwtModule } from '@auth0/angular-jwt';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],

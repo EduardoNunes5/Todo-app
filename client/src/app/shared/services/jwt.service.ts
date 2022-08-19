@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -6,7 +7,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 export class JwtService{
 
-  constructor(private jwtHelper: JwtHelperService){}
+  constructor(private jwtHelper: JwtHelperService,
+    private router: Router){}
 
 
   public setRoles(roles:[]){
@@ -51,6 +53,12 @@ export class JwtService{
 
   public clear(){
     localStorage.clear();
+  }
+
+  public logout(){
+    localStorage.clear();
+    this.router.navigate(['/', 'auth']);
+
   }
 
   public isLoggedIn(): boolean{
