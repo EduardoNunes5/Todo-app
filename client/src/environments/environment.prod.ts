@@ -1,6 +1,4 @@
 export const environment = {
   production: true,
-  backend: {
-    baseURL:"https://todo-edu.herokuapp.com/"
-  }
+    apiUrl:"https://todo-edu.herokuapp.com/"
 };
