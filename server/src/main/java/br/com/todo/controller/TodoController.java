@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -19,6 +20,7 @@ public class TodoController {
     private TodoService service;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public TodoDTO save(@RequestBody @Valid TodoDTO todo){
         return this.service.save(todo);
     }

@@ -55,7 +55,7 @@ export class TodoChangeComponent implements OnInit {
       method.perform.subscribe(data => {
         this.notificationService.success(method.message);
         this.router.navigate(['']);
-      })
+      }, ({error}) => this.notificationService.error(error.message))
 
     }
   }

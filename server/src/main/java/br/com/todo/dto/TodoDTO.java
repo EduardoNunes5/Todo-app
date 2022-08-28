@@ -1,6 +1,7 @@
 package br.com.todo.dto;
 
 import br.com.todo.entity.Todo;
+import br.com.todo.service.validation.UniqueUserTodoValid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class TodoDTO {
     private Long id;
 
     @NotBlank
+    @UniqueUserTodoValid
     private String title;
 
     private String description;
