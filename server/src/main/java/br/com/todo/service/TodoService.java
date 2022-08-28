@@ -4,7 +4,7 @@ package br.com.todo.service;
 import br.com.todo.dto.TodoDTO;
 import br.com.todo.entity.Todo;
 import br.com.todo.repository.TodoRepository;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;

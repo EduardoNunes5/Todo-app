@@ -5,7 +5,7 @@ import br.com.todo.dto.JwtResponse;
 import br.com.todo.entity.User;
 import br.com.todo.service.JwtUtil;
 import br.com.todo.service.UserDetailsServiceImpl;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

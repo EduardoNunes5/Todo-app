@@ -1,7 +1,7 @@
 package br.com.todo.dto;
 
 import br.com.todo.entity.User;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

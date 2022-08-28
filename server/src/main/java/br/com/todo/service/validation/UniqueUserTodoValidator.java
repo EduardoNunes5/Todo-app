@@ -3,8 +3,8 @@ package br.com.todo.service.validation;
 import br.com.todo.entity.Todo;
 import br.com.todo.entity.User;
 import br.com.todo.repository.TodoRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
