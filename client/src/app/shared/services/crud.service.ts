@@ -1,13 +1,16 @@
 import { Page } from './../components/pagination/page';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 export class CrudService<T, ID> {
 
 	constructor(
 		protected http: HttpClient,
 		protected base: string
-	) { }
+	) {
+    this.base = environment.apiUrl + base;
+   }
 
   public findOne(id: ID): Observable<T>{
     return this.http.get<T>(this.base + '/' + id);
